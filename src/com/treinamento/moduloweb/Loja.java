@@ -1,12 +1,21 @@
 package com.treinamento.moduloweb;
 
+import java.util.Date;
+
 public class Loja {
 
 	private Integer codigo;
 	private String nome;
 	private String logomarca;
 	private String cidade;
+	private Date dtInauguracao;
 	
+	public Date getDtInauguracao() {
+		return dtInauguracao;
+	}
+	public void setDtInauguracao(Date dtInauguracao) {
+		this.dtInauguracao = dtInauguracao;
+	}
 	public Integer getCodigo() {
 		return codigo;
 	}

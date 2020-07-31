@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page import="com.treinamento.moduloweb.Loja"%>
 
@@ -34,6 +35,7 @@
 					<td><c:out value="${loja.nome}"></c:out>  </td>
 					<td><c:out value="${loja.logomarca}"></c:out>  </td>
 					<td><c:out value="${loja.cidade}"></c:out>  </td>
+					<td><fmt:formatDate value="${loja.dtInauguracao}" pattern="dd/MM/yyyy"/> </td>
 				</tr>
 		</c:forEach>
 	</table>
