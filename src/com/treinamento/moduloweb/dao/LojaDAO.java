@@ -16,7 +16,7 @@ public class LojaDAO {
 	private String SQL_ATUALIZA = "update tb_loja set nome = ?, logomarca = ?, cidade = ? where codigo = ?";
 	private String SQL_BUSCA_POR_ID = "select codigo, nome, logomarca, cidade from tb_loja where codigo = ?";
 	private String SQL_LISTAR_TODAS = "select codigo, nome, logomarca, cidade from tb_loja";
-	private String SQL_INSERIR = "insert into tb_loja values(null, ?, ?, ?)"; 
+	private String SQL_INSERIR = "insert into tb_loja values(null, ?, ?, ?)";
 	private String SQL_EXCLUIR_POR_ID = "delete from tb_loja where codigo = ?";
 	
 	public LojaDAO(Connection conn) {

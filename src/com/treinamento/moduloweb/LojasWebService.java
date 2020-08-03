@@ -22,7 +22,6 @@ public class LojasWebService extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
 		String codigo = req.getParameter("codigo");
 		
 		LojaService service = new LojaService();
@@ -80,10 +79,15 @@ public class LojasWebService extends HttpServlet{
 
 		String codigo = req.getParameter("codigo");
 		
+		if(codigo.isEmpty()) {
+			resp.getWriter().append("Parâmetro não informado");
+			resp.setStatus(409);
+		}
+
 		LojaService service = new LojaService();
 		service.excluirPorId(Integer.valueOf(codigo));
 		
-		resp.getWriter().append("Registro atualizado com sucesso");
+		resp.getWriter().append("Registro excluído com sucesso");
 		resp.setContentType("application/json");
 		resp.setStatus(202);
 	}
