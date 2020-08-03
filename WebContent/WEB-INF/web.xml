@@ -9,7 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-
   
   <default-context-path>ProjetoServlet</default-context-path>
 <!--   <servlet-mapping>

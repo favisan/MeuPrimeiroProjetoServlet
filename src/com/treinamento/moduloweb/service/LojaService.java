@@ -38,5 +38,18 @@ public class LojaService {
 	}
 	
 	public void inserir(Loja loja) {
-		dao.inserir(loja);}
+		dao.inserir(loja);
+	}
+	
+	public Loja buscarPorId(Integer codigo){
+		return dao.buscarPorId(codigo);
+	}
+	
+	public void atualizar(Loja loja){
+		dao.atualizar(loja);
+	}
+	
+	public void excluirPorId(Integer codigo) {
+		dao.excluirPorId(codigo);
+	}
 }

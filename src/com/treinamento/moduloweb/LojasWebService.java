@@ -23,15 +23,20 @@ public class LojasWebService extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		LojaService service = new LojaService();
-		List<Loja> listaLojas = service.listarLojas();
+		String codigo = req.getParameter("codigo");
 		
+		LojaService service = new LojaService();
 		Gson json = new Gson();
 		
-		String resultado = json.toJson(listaLojas);
-		
-		resp.getWriter().append(resultado);
-		resp.setContentType("application/json");
+		if(codigo != null && !codigo.isEmpty()) {
+			Loja loja = service.buscarPorId(Integer.valueOf(codigo));
+			resp.getWriter().append(json.toJson(loja));
+			resp.setContentType("application/json");
+		}else {
+			List<Loja> listaLojas = service.listarLojas();
+			resp.getWriter().append(json.toJson(listaLojas));
+			resp.setContentType("application/json");
+		}
 	}
 	
 	@Override
@@ -50,6 +55,37 @@ public class LojasWebService extends HttpServlet{
 		resp.getWriter().append("Registro inserido com sucesso");
 		resp.setContentType("application/json");
 		resp.setStatus(201);
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		String conteudo = HttpUtil.getBody(req);
+		
+		System.out.println(conteudo);
+		
+		Gson json = new Gson();
+		Loja loja = json.fromJson(conteudo, Loja.class);
+		
+		LojaService service = new LojaService();
+		service.atualizar(loja);
+		
+		resp.getWriter().append("Registro atualizado com sucesso");
+		resp.setContentType("application/json");
+		resp.setStatus(202);
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String codigo = req.getParameter("codigo");
+		
+		LojaService service = new LojaService();
+		service.excluirPorId(Integer.valueOf(codigo));
+		
+		resp.getWriter().append("Registro atualizado com sucesso");
+		resp.setContentType("application/json");
+		resp.setStatus(202);
 	}
 	
 }

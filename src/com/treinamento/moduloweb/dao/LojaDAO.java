@@ -14,7 +14,7 @@ public class LojaDAO {
 	Connection conn;
 	
 	private String SQL_ATUALIZA = "update tb_loja set nome = ?, logomarca = ?, cidade = ? where codigo = ?";
-	private String SQL_BUSCA_POR_ID = "select codigo, nome, logomarca, cidade from tb_loja where codigo = ? and nome = ?";
+	private String SQL_BUSCA_POR_ID = "select codigo, nome, logomarca, cidade from tb_loja where codigo = ?";
 	private String SQL_LISTAR_TODAS = "select codigo, nome, logomarca, cidade from tb_loja";
 	private String SQL_INSERIR = "insert into tb_loja values(null, ?, ?, ?)"; 
 	private String SQL_EXCLUIR_POR_ID = "delete from tb_loja where codigo = ?";
@@ -48,23 +48,21 @@ public class LojaDAO {
 		return listaLojas;
 	}
 
-	public List<Loja> buscarPorId(Integer codigo) {
-		
-		List<Loja> listaLojas = new ArrayList();
+	public Loja buscarPorId(Integer codigo) {
 		
 	try (PreparedStatement stmt = conn.prepareStatement(SQL_BUSCA_POR_ID)) {
 
 			stmt.setInt(1, codigo);
 			ResultSet rs = stmt.executeQuery();
 			
-			while (rs.next()) {
+			if (rs.next()) {
 				Loja loja = new Loja();
 				loja.setCodigo(rs.getInt("codigo"));
 				loja.setNome(rs.getString("nome"));
 				loja.setLogomarca(rs.getString("logomarca"));
 				loja.setCidade(rs.getString("cidade"));
 
-				listaLojas.add(loja);
+				return loja;
 			}
 
 			rs.close();
@@ -72,8 +70,7 @@ public class LojaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return listaLojas;
+		return null;
 	}
 
 	public void inserir(Loja loja) {
