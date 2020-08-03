@@ -10,30 +10,17 @@ public class ConexaoMySqlDAO {
 	private String usuario = "java";
 	private String senha = "1234";
 	
-	public Connection obterConexao() {
+	public Connection obterConexao() throws SQLException {
 		
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn =  DriverManager.getConnection(url, usuario, senha);
 			
-		} catch (Exception e1) {
+		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
 		return conn;
 	}
-
-//	public Connection getConn() {
-//		return conn;
-//	}
-//
-//	private void close() {
-//		try {
-//			conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
 	
 }

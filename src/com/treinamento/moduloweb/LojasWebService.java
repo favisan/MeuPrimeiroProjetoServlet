@@ -3,19 +3,19 @@ package com.treinamento.moduloweb;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.treinamento.moduloweb.service.LojaService;
 
-@WebServlet("/v1/lojas")
-public class ConsultarLojasServlet extends HttpServlet{
+@WebServlet("/lojas")
+public class LojasWebService extends HttpServlet{
 	
-	public ConsultarLojasServlet() {
+	public LojasWebService() {
 		System.out.println("Iniciando a nosssa servlet...");
 	}
 	
@@ -25,16 +25,9 @@ public class ConsultarLojasServlet extends HttpServlet{
 		LojaService service = new LojaService();
 		List<Loja> listaLojas = service.listarLojas();
 		
-		Gson json = new Gson();
+		req.setAttribute("lojas", listaLojas);
 		
-		String resultado = json.toJson(listaLojas);
-		
-		resp.getWriter().append(resultado);
-		resp.setContentType("application/json");
-		
-//		req.setAttribute("lojas", listaLojas);
-//		
-//		RequestDispatcher rd = req.getRequestDispatcher("/consulta_loja.jsp");
-//		rd.forward(req, resp);
+		RequestDispatcher rd = req.getRequestDispatcher("/consulta_loja.jsp");
+		rd.forward(req, resp);
 	}
 }
