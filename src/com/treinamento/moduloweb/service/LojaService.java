@@ -10,17 +10,23 @@ import com.treinamento.moduloweb.dao.LojaDAO;
 
 public class LojaService {
 
-	public List<Loja> listarLojas(){
+	LojaDAO dao = null;
+	Connection conn = null;
+	
+	public LojaService() {
 		ConexaoMySqlDAO conexaoMySql = new ConexaoMySqlDAO();
-		Connection conn = null;
+		
 		try {
 			conn = conexaoMySql.obterConexao();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		
-		LojaDAO lojaDAO = new LojaDAO(conn);
-		List<Loja> listaLojas = lojaDAO.listarTodas();
+		dao = new LojaDAO(conn);
+	}
+	
+	public List<Loja> listarLojas(){
+		List<Loja> listaLojas = dao.listarTodas();
 		
 		try {
 			conn.close();
@@ -30,4 +36,7 @@ public class LojaService {
 		
 		return listaLojas;
 	}
+	
+	public void inserir(Loja loja) {
+		dao.inserir(loja);}
 }
