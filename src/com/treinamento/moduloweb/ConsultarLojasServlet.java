@@ -31,6 +31,4 @@ public class ConsultarLojasServlet extends HttpServlet{
 		rd.forward(req, resp);
 	}
 	
-
-	
 }

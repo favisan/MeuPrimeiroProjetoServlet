@@ -2,7 +2,7 @@ package com.treinamento.moduloweb;
 
 import java.util.Date;
 
-public class Loja {
+public class Loja{
 
 	private Integer codigo;
 	private String nome;

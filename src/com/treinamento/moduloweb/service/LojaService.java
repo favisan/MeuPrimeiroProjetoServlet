@@ -27,7 +27,7 @@ public class LojaService {
 	
 	public List<Loja> listarLojas(){
 		List<Loja> listaLojas = dao.listarTodas();
-		
+
 		try {
 			conn.close();
 		} catch (SQLException e) {
