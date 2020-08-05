@@ -42,7 +42,7 @@ public class NotaFiscalDAO {
 	public List<TbNf> buscarNfFilial() throws Exception{
 		
 		Statement stmt = conn.createStatement();
-		ResultSet rsTbNf = stmt.executeQuery("select nf.ID_NF, nf.DT_EMISSAO, nf.NR_NF, nf.CD_FILIAL, f.NM_FILIAL, 1 CD_TIPO_NF \n" + 
+		ResultSet rsTbNf = stmt.executeQuery("select nf.ID_NF, nf.DT_EMISSAO, nf.NR_NF NOTA_FISCAL, nf.CD_FILIAL, f.NM_FILIAL, 1 CD_TIPO_NF \n" + 
 				"from TB_NF nf\n" + 
 				"inner join TB_FILIAL f on\n" + 
 				"nf.CD_FILIAL = f.CD_FILIAL");
@@ -54,7 +54,7 @@ public class NotaFiscalDAO {
 			
 			nf.setIdNf(rsTbNf.getInt("ID_NF"));
 			nf.setDtEmissao(rsTbNf.getDate("DT_EMISSAO"));
-			nf.setNrNf(rsTbNf.getInt("NR_NF"));
+			nf.setNrNf(rsTbNf.getInt("NOTA_FISCAL"));
 			nf.setCdFilial(rsTbNf.getInt("CD_FILIAL"));
 			nf.setNomeFilial(rsTbNf.getString("NM_FILIAL"));
 			nf.setCdTipoNf(rsTbNf.getInt("CD_TIPO_NF"));

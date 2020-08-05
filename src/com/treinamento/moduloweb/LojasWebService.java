@@ -3,6 +3,7 @@ package com.treinamento.moduloweb;
 import java.io.IOException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,25 +11,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.treinamento.moduloweb.dao.CrudEntityManager;
+import com.treinamento.moduloweb.entity.LojaEntity;
 import com.treinamento.moduloweb.service.LojaService;
 import com.treinamento.moduloweb.util.HttpUtil;
 
 @WebServlet("/v1/lojas")
 public class LojasWebService extends HttpServlet{
-	
+		
 	public LojasWebService() {
 		System.out.println("Iniciando a nosssa servlet...");
 	}
-	
+		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String codigo = req.getParameter("codigo");
-		
+				
 		LojaService service = new LojaService();
 		Gson json = new Gson();
 		
 		if(codigo != null && !codigo.isEmpty()) {
-			Loja loja = service.buscarPorId(Integer.valueOf(codigo));
+//			Loja loja = service.buscarPorId(Integer.valueOf(codigo));
+			LojaEntity loja = service.buscarPorId(Integer.valueOf(codigo));
+			
 			resp.getWriter().append(json.toJson(loja));
 			resp.setContentType("application/json");
 		}else {
@@ -46,10 +51,13 @@ public class LojasWebService extends HttpServlet{
 		System.out.println(conteudo);
 		
 		Gson json = new Gson();
-		Loja loja = json.fromJson(conteudo, Loja.class);
+//		Loja loja = json.fromJson(conteudo, Loja.class);
+		LojaEntity loja = json.fromJson(conteudo, LojaEntity.class);
 		
 		LojaService service = new LojaService();
 		service.inserir(loja);
+		
+		LojaEntity lojaEntity = json.fromJson(conteudo, LojaEntity.class);
 		
 		resp.getWriter().append("Registro inserido com sucesso");
 		resp.setContentType("application/json");
@@ -64,7 +72,8 @@ public class LojasWebService extends HttpServlet{
 		System.out.println(conteudo);
 		
 		Gson json = new Gson();
-		Loja loja = json.fromJson(conteudo, Loja.class);
+//		Loja loja = json.fromJson(conteudo, Loja.class);
+		LojaEntity loja = json.fromJson(conteudo, LojaEntity.class);
 		
 		LojaService service = new LojaService();
 		service.atualizar(loja);
@@ -79,7 +88,7 @@ public class LojasWebService extends HttpServlet{
 
 		String codigo = req.getParameter("codigo");
 		
-		if(codigo.isEmpty()) {
+		if(codigo == null || codigo.isEmpty()) {
 			resp.getWriter().append("Parâmetro não informado");
 			resp.setStatus(409);
 		}
