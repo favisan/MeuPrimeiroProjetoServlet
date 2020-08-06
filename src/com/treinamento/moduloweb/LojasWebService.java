@@ -22,7 +22,7 @@ public class LojasWebService extends HttpServlet{
 	public LojasWebService() {
 		System.out.println("Iniciando a nosssa servlet...");
 	}
-		
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String codigo = req.getParameter("codigo");
@@ -37,7 +37,7 @@ public class LojasWebService extends HttpServlet{
 			resp.getWriter().append(json.toJson(loja));
 			resp.setContentType("application/json");
 		}else {
-			List<Loja> listaLojas = service.listarLojas();
+			List<LojaEntity> listaLojas = service.listarTodas();
 			resp.getWriter().append(json.toJson(listaLojas));
 			resp.setContentType("application/json");
 		}
@@ -49,7 +49,7 @@ public class LojasWebService extends HttpServlet{
 		String conteudo = HttpUtil.getBody(req);
 		
 		System.out.println(conteudo);
-		
+			
 		Gson json = new Gson();
 //		Loja loja = json.fromJson(conteudo, Loja.class);
 		LojaEntity loja = json.fromJson(conteudo, LojaEntity.class);

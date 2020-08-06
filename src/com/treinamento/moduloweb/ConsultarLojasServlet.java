@@ -22,13 +22,13 @@ public class ConsultarLojasServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		LojaService service = new LojaService();
-		List<Loja> listaLojas = service.listarLojas();
-		
-		req.setAttribute("lojas", listaLojas);
-		
-		RequestDispatcher rd = req.getRequestDispatcher("/consulta_loja.jsp");
-		rd.forward(req, resp);
+//		LojaService service = new LojaService();
+////		List<Loja> listaLojas = service.listarLojas();
+//		
+//		req.setAttribute("lojas", listaLojas);
+//		
+//		RequestDispatcher rd = req.getRequestDispatcher("/consulta_loja.jsp");
+//		rd.forward(req, resp);
 	}
 	
 }

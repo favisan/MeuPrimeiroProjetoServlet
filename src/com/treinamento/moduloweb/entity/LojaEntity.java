@@ -4,17 +4,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_loja")
+@NamedQueries({
+	@NamedQuery(name = "buscarPorNome", query = "select loja from LojaEntity loja where loja.nome = :nome"),
+	@NamedQuery(name = "buscarTodas", query = "select loja from LojaEntity loja")
+			  }
+)
 public class LojaEntity {
 	
 	@Id
 	@GeneratedValue
 	private Integer codigo;
 	
-	@Column(name = "nome")
+	@Column
 	private String nome;
 	
 	@Column(name = "logomarca")
@@ -22,11 +29,11 @@ public class LojaEntity {
 	
 	@Column
 	private String cidade;
-
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
-
+	
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
@@ -54,9 +61,5 @@ public class LojaEntity {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
-	
-	
-	
 	
 }
